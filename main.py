@@ -13,7 +13,8 @@ import webrtcvad
 from halo import Halo
 from scipy import signal
 
-logging.basicConfig(level=20)
+now = time.strftime('%Y%m%d_%H%M%S')
+logging.basicConfig('logs/log_{}.txt'.format(now), level=logging.INFO)
 
 class Audio(object):
     """Streams raw audio from microphone. Data is received in a separate thread, and stored in a buffer, to be read from."""
