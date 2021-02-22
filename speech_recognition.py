@@ -109,12 +109,12 @@ class VADAudio(Audio):
     """Filter & segment audio with voice activity detection."""
 
     def __init__(self, aggressiveness=3, device=None, input_rate=None, file=None):
-        filename, ext = os.path.splitext(file)
-        if ext != '.wav':
-            new_file = filename + '.wav'
-            subprocess.run(['ffmpeg', '-i', file, new_file], check=True)
-            print('Written', new_file, 'from', file)
-            file = new_file
+        # filename, ext = os.path.splitext(file)
+        # if ext != '.wav':
+        #     new_file = filename + '.wav'
+        #     subprocess.run(['ffmpeg', '-i', file, new_file], check=True)
+        #     print('Written', new_file, 'from', file)
+        #     file = new_file
         super().__init__(device=device, input_rate=input_rate, file=file)
         self.vad = webrtcvad.Vad(aggressiveness)
 
@@ -213,7 +213,7 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description="Stream from microphone to DeepSpeech using VAD")
 
-    parser.add_argument('-v', '--vad_aggressiveness', type=int, default=3,
+    parser.add_argument('-v', '--vad_aggressiveness', type=int, default=1,
                         help="Set aggressiveness of VAD: an integer between 0 and 3, 0 being the least aggressive about filtering out non-speech, 3 the most aggressive. Default: 3")
     parser.add_argument('--nospinner', action='store_true',
                         help="Disable spinner")
