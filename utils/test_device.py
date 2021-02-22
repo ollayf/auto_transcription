@@ -45,7 +45,7 @@ i=0
 # streams in data
 while True:
     data = stream.read(CHUNK)
-    data_int = np.frombuffer(data, dtype=np.int16) * 10
+    data_int = np.frombuffer(data, dtype=np.int16) * 5
     line.set_ydata(data_int)
     fig.suptitle(f'Sound From -- {time.strftime("%H:%M:%S")}')
     fig.canvas.draw()

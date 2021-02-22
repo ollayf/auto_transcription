@@ -2,6 +2,8 @@
 sr
 installers
 models
-recordings
-videos
-logs
+recordings/*
+videos/*
+logs/*
+data/*
+__pycache__

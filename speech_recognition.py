@@ -12,6 +12,7 @@ import wave
 import webrtcvad
 from halo import Halo
 from scipy import signal
+import subprocess
 
 now = time.strftime('%Y%m%d_%H%M%S')
 logging.basicConfig(filename=f'logs/log_{now}.txt', level=logging.INFO)
@@ -108,6 +109,12 @@ class VADAudio(Audio):
     """Filter & segment audio with voice activity detection."""
 
     def __init__(self, aggressiveness=3, device=None, input_rate=None, file=None):
+        filename, ext = os.path.splitext(file)
+        if ext != '.wav':
+            new_file = filename + '.wav'
+            subprocess.run(['ffmpeg', '-i', file, new_file], check=True)
+            print('Written', new_file, 'from', file)
+            file = new_file
         super().__init__(device=device, input_rate=input_rate, file=file)
         self.vad = webrtcvad.Vad(aggressiveness)
 
